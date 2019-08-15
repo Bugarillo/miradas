@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+      
+<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Barlow+Condensed:200,400&display=swap" rel="stylesheet">
+
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>Admin | Mirada furtiva</title>
+
+  <meta name="description" content="Mirada furtiva">
+  <link rel="icon" href="">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+   <main>
+
+    <div class="jumbotron jumbotron-fluid" id="top">
+      <div class="container">
+        <h1 class="display-3 text-white text-left "><b>Mirada furtiva</b></h1>
+        <p class="lead text-white text-left font-175 ">Instantes capturados que develan historias encriptadas</p>
+      </div>
+    </div>
+ 
+  <header id="navbar"></header>
+
+    
+<div class="container screen">
+  <div class="container row ">
+    <div class="col-12 pt-3 pr-5 d-flex align-items-end flex-column">
+        <a class="btn bg-boton text-white btn  mb-2"  href="almacena.html" id="btn-subir">
+          <b>Subir imagen</b>
+        </a>
+    </div>
+  </div>
+  <h4 class="text-center pt-5 pr-3">Administración de archivos (CRUD)</h4>
+  
+  <div class="container">
+  <form id="form-photos" class="container my-5 pb-3">
+    <div class="row container">
+    <div class="form-group  col-md-3">
+      <input type="text" class="form-control" id="month" placeholder="Mes" required/>
+    </div>
+    <div class="form-group col-md-3">
+      <input type="text" class="form-control" id="day" placeholder="Día" required/>
+    </div>
+    <div class="form-group col-md-6">
+        <input type="text" class="form-control" id="title" placeholder="Título" required/>
+      </div>
+    <div class="form-group col-md-12">
+      <textarea type="text" class="form-control" id="text" placeholder="Texto" cols="20" rows="3" required></textarea>
+    </div>
+    <div class="form-group col-md-12">
+      <input type="text" class="form-control" id="category" placeholder="Categoría" required/>
+    </div>
+  </div>
+    <div class="form-group pl-3">
+      <input type="submit" class="btn bg-success text-white" value="Salvar" />
+      <input type="hidden" id="key" />
+    </div>
+  </form>
+</div>
+
+  
+  <table id="table-photos" class="table table-hover container my-5">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">Mes</th>
+        <th scope="col">Día</th>
+        <th scope="col">Título</th>
+        <th scope="col">Texto</th>
+        <th scope="col">Categoría</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <template id="template-photo">
+    <tr id="" class="key">
+      <th scope="row">key</th>
+      <td class="month">Mes</td>
+      <td class="day">Día</td>
+      <td class="title">Título</td>
+      <td class="text">Texto</td>
+      <td class="category">Categoría</td>
+      <td>
+        <button class="btn bg-dark text-white edit">
+          Editar
+        </button>
+      </td>
+      <td>
+        <button class="btn bg-danger text-white delete">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </template>
+
+</div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
+  <script>  
+
+     const firebaseConfig = {
+          apiKey: "AIzaSyCTMaLcAxBbD-_T4Hz7Yx4TKPSkZSt3JjY",
+          authDomain: "mirada-furtiva.firebaseapp.com",
+          databaseURL: "https://mirada-furtiva.firebaseio.com",
+          projectId: "mirada-furtiva",
+          storageBucket: "mirada-furtiva.appspot.com",
+          messagingSenderId: "1061082320250",
+          appId: "1:1061082320250:web:474e48c9185c0513"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    
+  //Nodes 
+  const db = firebase.database(),
+    refPhotos = db.ref('photos'),
+    table = document.getElementById("table-photos"),
+    form = document.getElementById("form-photos"),
+    fragment = document.createDocumentFragment(),
+    template = document.getElementById("template-photo").content;
+
+  //functions
+  function readPhotos() {
+      refPhotos.on("value", snapshot => {
+          //limpiar el contenido de la tabla
+          table.querySelector("tbody").innerHTML = "";
+
+          snapshot.forEach(photo =>{
+              console.log(photo, photo.key, photo.val());
+
+              let values = photo.val(),
+              key = photo.key;
+
+              template.querySelector(".key").id = key;
+              template.querySelector("[scope = row]").innerText = key;
+              template.querySelector(".month").innerText = values.month;
+              template.querySelector(".day").innerText = values.day;
+              template.querySelector(".title").innerText = values.title;
+              template.querySelector(".text").innerText = values.text;
+              template.querySelector(".category").innerText = values.category;
+            
+              let clone = document.importNode(template, true);
+              fragment.appendChild(clone);
+          });
+
+          table.querySelector('tbody').appendChild(fragment);
+      });
+  }
+
+  //listeners
+  document.addEventListener("DOMContentLoaded", e => {readPhotos()});
+
+  document.addEventListener("submit", e => {
+      if(e.target.matches("#form-photos")){
+          e.preventDefault();
+          //alert("El form es procesado")
+          
+
+        let key = e.target.key,
+          values = {
+            month: form.month.value,
+            day: form.day.value,
+            title: form.title.value,
+            text: form.text.value,
+            category: form.category.value,
+          };
+        if (!key.value) {
+          //Insertar
+          refPhotos.push(values);
+        } else {
+          //Actualizar
+          refPhotos.child(key.value).update(values);
+        }
+
+          form.reset();
+      }
+  });
+
+  document.addEventListener("click", e => {
+      //alert("click");
+      if (e.target.matches(".edit")){
+         // alert('Editar');
+         //console.log(e.target.parentElement.parentElement.id);
+
+        let parent = e.target.parentElement.parentElement;
+        form.month.value = parent.querySelector(".month").innerText;
+        form.day.value = parent.querySelector(".day").innerText;
+        form.title.value = parent.querySelector(".title").innerText;
+        form.text.value = parent.querySelector(".text").innerText;
+        form.category.value = parent.querySelector(".category").innerText;
+        form.key.value = parent.id;
+      }
+
+      if (e.target.matches(".delete")){
+          //alert('Delete');
+          let key = e.target.parentElement.parentElement.id,
+          deleteId = confirm(`¿Estás seguro de eliminar el id ${key}?`);
+        if (deleteId) {
+          refPhotos.child(key).remove();
+        } else {
+          return;
+        }
+      }
+  });
+
+    </script>
+
+  </main>
+
+
+  <footer id="footer" class="p-3 text-center bg-dark"></footer>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.0.3/smooth-scroll.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      const scroll = new SmoothScroll('a[href*="#"]', {
+        offset: '50'
+      });
+    </script>
+</body>
+
+</html>
+
+

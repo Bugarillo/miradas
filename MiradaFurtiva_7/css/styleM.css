@@ -1,0 +1,66 @@
+:root {
+    --first-color: rgb(0, 150, 217);
+    --first-alpha-color: rgba(0, 150, 217, 0.75);
+    --second-color: rgb(23, 18, 38);
+    --second-alpha-color: rgba(23, 18, 38, 0.75);
+  }
+  
+  main {
+    margin-bottom: 6rem;
+  }
+  
+  .bg-dark,
+  .table .thead-dark th {
+    background-color: var(--second-color) !important;
+  }
+  
+  .bg-info,
+  .btn-info {
+    background-color: var(--first-color) !important;
+  }
+  
+  .btn-info:hover {
+    background-color: var(--first-alpha-color) !important;
+  }
+  
+  .table [class^="fa"] {
+    color: var(--first-color);
+    cursor: pointer;
+  }
+  
+  .table [class^="fa"]:hover {
+    color: var(--first-alpha-color);
+  }
+  
+  .card-img {
+    object-fit: cover;
+  }
+  
+  .marathons {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-items: center;
+  }
+  
+  @media (min-width: 576px) {
+    .marathons {
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    }
+  }
+  
+  @media (min-width: 768px) {
+    main {
+      margin-top: 6rem;
+      margin-bottom: 0;
+    }
+  
+    .fixed-bottom {
+      top: 0;
+      bottom: initial;
+    }
+  
+    .marathons {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+  }

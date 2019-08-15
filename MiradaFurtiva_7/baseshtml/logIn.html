@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+      
+<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Barlow+Condensed:200,400&display=swap" rel="stylesheet">
+
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>logIn | Mirada furtiva</title>
+
+  <meta name="description" content="Mirada furtiva">
+  <link rel="icon" href="">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+   <main>
+
+    <div class="jumbotron jumbotron-fluid" id="top">
+      <div class="container">
+        <h1 class="display-3 text-white text-left "><b>Mirada furtiva</b></h1>
+        <p class="lead text-white text-left font-175 ">Instantes capturados que develan historias encriptadas</p>
+      </div>
+    </div>
+
+    <header id="navbar"></header>
+
+    <div class="container">
+          <div class="row screen">
+            <div class="col-6 offset-3">
+                <h4 class="text-center pt-2 col-8 offset-2">Para poder tener una mejor experiencia dentro de la página, te invitamos a registrarte</h4>
+
+                <section id="root" class="container"></section>
+              <section class="container mt-5">
+              <ul class="nav nav-tabs" id="tabLogin" role="tablist">
+                
+                <li class="nav-item">
+                  <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Iniciar Sesión</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="false">Registrarse</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" id="signGo-tab" data-toggle="tab" href="#signGo" role="tab" aria-controls="signGo" aria-selected="false">Registrarse con Google</a>
+                </li>
+
+              </ul>
+              <div class="tab-content" id="tabLoginContent">
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                  <form id="login-form" class="container mt-5">
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control" placeholder="email" required/>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="pass" class="form-control" placeholder="contraseña" required/>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Ingresar</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="profile-sigin">
+                  <form id="signin-form" class="container mt-5">
+                    <div class="form-group">
+                      <input type="text" name="nombre" class="form-control" placeholder="nombre" required/>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control" placeholder="email" required/>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="pass" class="form-control" placeholder="contraseña" required/>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Crear cuenta</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="tab-pane fade" id="signGo" role="tabpanel" aria-labelledby="profile-signGo">
+                  <form id="signGo-form" class="container mt-5">       
+                   <div class="form-group">
+                      <div class="col-6 offset-3">
+                        <div class="form-group text-center">
+                          <button id="login" type="submit" class="btn btn-lg btn-primary">
+                            Ingresar
+                          </button>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+
+              
+
+              </div>
+            </div>
+          </div>
+        </section>
+        </main>
+
+        <footer id="footer" class="p-3 text-center bg-dark"></footer>
+
+       
+
+    </div>
+
+    
+      
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+      <script>
+
+          const firebaseConfig = {
+          apiKey: "AIzaSyCTMaLcAxBbD-_T4Hz7Yx4TKPSkZSt3JjY",
+          authDomain: "mirada-furtiva.firebaseapp.com",
+          databaseURL: "https://mirada-furtiva.firebaseio.com",
+          projectId: "mirada-furtiva",
+          storageBucket: "mirada-furtiva.appspot.com",
+          messagingSenderId: "1061082320250",
+          appId: "1:1061082320250:web:474e48c9185c0513"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+  
+        //https://firebase.google.com/docs/auth/
+          const auth = firebase.auth(),
+          formSignin = document.getElementById("signin-form"),
+          formLogin = document.getElementById("login-form"),
+          provider = new firebase.auth.GoogleAuthProvider(),
+          app = document.getElementById("root");
+          auth.onAuthStateChanged(user => {
+          //console.log(user);
+          if (user) {
+            console.log("Usuario Autenticado");
+            app.innerHTML = `
+              <p class="lead bg-success text-white p-3 text-center">
+                <b>!Felicidades!</b> <br>Te encuentras dentro de la aplicación :) <br>
+                <button id="logout" class="btn btn-warning mt-2">Salir</button>
+              </p>
+              
+              <p class="lead p-2 text-center">
+              Bienvenido <b>${user.displayName}<b> <img src="${user.photoURL}" class="img-fluid col-3 rounded-circle">
+              </p>
+            
+          `;
+            
+          } else {
+            console.log("Usuario NO Autenticado");
+            //template string
+            app.innerHTML = `
+              <p class="lead bg-danger text-white p-3 text-center">
+                ¡Regístrate para poder entrar! :(
+              </p>
+            `;
+          }
+        });
+  
+  
+        document.addEventListener("submit", e => {
+          e.preventDefault();
+          let form = e.target;
+          if (form.matches("#signin-form")) {
+            alert("Creando Cuenta");
+            //console.log(form.nombre.value, form.email.value, form.pass.value);
+            auth
+              .createUserWithEmailAndPassword(form.email.value, form.pass.value)
+              .then(res => {
+                //console.log(res);
+                app.innerHTML = `
+                  <p class="lead bg-success text-white p-3 text-center">
+                    Usuario creado con el correo <br><b>${form.email.value}</b>
+                  </p>
+                `;
+                form.reset();
+              })
+              .catch(err => {
+                //console.log(err);
+                app.innerHTML = `
+                  <p class="lead bg-danger text-white p-3 text-center">
+                    Ocurrio un error al crear la cuenta <br><b>${err.message}</b>
+                  </p>
+                `;
+                form.nombre.focus();
+              });
+          }
+          if (form.matches("#login-form")) {
+            alert("Iniciando Sesión");
+            auth
+              .signInWithEmailAndPassword(form.email.value, form.pass.value)
+              .then(res => {
+                //console.log(res);
+                app.innerHTML = `
+                  <p class="lead bg-success text-white p-3 text-center">
+                    Usuario logueado con el correo <br><b>${form.email.value}</b>
+                  </p>
+                `;
+                form.reset();
+              })
+              .catch(err => {
+                //console.log(err);
+                app.innerHTML = `
+                  <p class="lead bg-danger text-white p-3 text-center">
+                    Ocurrio un error al iniciar sesión <br><b>${err.message}</b>
+                  </p>
+                `;
+                form.pass.focus();
+              });
+          }
+        });
+        document.addEventListener("click", e => {
+          if (e.target.matches("#logout")) {
+            alert("Cerrando sesión");
+            auth.signOut();
+          }
+        });
+
+       /*  INGRESANDO CON GOOGLE */
+        document.addEventListener("click", e => {
+        if (e.target.matches("#login")) {
+          alert("Ingresando con Google");
+          firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(res => {
+              console.log(res);
+              app.innerHTML = `
+                <p class="lead bg-success text-white p-3 text-center">
+                  Bienvenido <b>${res.user.displayName}<b>
+                </p>
+              `;
+            })
+            .catch(err => {
+              console.log(err);
+              app.innerHTML = `
+                <p class="lead bg-danger text-white p-3">
+                  Error: <i>${err.code}</i> - <b>${err.message}</b>
+                </p>
+              `;
+            });
+        }
+        if (e.target.matches("#logout")) {
+          alert("Cerrando sesión");
+          auth.signOut();
+        }
+      });
+      </script>
+
+ 
+
+
+  
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.0.3/smooth-scroll.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+      const scroll = new SmoothScroll('a[href*="#"]', {
+        offset: '50'
+      });
+    </script>
+    
+  </body>
+</html>
+
+

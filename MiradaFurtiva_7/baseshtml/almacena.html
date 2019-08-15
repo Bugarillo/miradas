@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+      
+<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Barlow+Condensed:200,400&display=swap" rel="stylesheet">
+
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>Admin | Mirada furtiva</title>
+
+  <meta name="description" content="Mirada furtiva">
+  <link rel="icon" href="">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+   <main>
+
+    <div class="jumbotron jumbotron-fluid" id="top">
+      <div class="container">
+        <h1 class="display-3 text-white text-left "><b>Mirada furtiva</b></h1>
+        <p class="lead text-white text-left font-175 ">Instantes capturados que develan historias encriptadas</p>
+      </div>
+    </div>
+ 
+  <header id="navbar"></header>
+<div class="container screen">
+  <h2 class="text-center pt-5">Sube tus archivos</h2>
+  
+  <h4 class="text-center">Almacenamiento Firebase</h4>
+  <section class="container my-5">
+    <div class="row">
+      <div class="col-6 offset-3">
+        <form id="form-upload">
+          <div class="form-group">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="uploader" multiple/>
+              <label class="custom-file-label" for="uploader" data-browse="Buscar">Elegir archivo(s)</label>
+            </div>
+          </div>
+          <div id="progress-container" class="form-group text-center d-none">
+            <div class="progress">
+              <div
+                id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+            <p id="progress-advance" class="lead"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <div class="row text-center align-items-center">
+  <section id="root" class="container align-items-center"></section>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
+  <script>
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCTMaLcAxBbD-_T4Hz7Yx4TKPSkZSt3JjY",
+    authDomain: "mirada-furtiva.firebaseapp.com",
+    databaseURL: "https://mirada-furtiva.firebaseio.com",
+    projectId: "mirada-furtiva",
+    storageBucket: "mirada-furtiva.appspot.com",
+    messagingSenderId: "1061082320250",
+    appId: "1:1061082320250:web:474e48c9185c0513"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+    bsCustomFileInput.init();
+    //https://firebase.google.com/docs/storage/
+
+    const storage = firebase.storage(),
+      storageRef = storage.ref(),
+      filesRef = storageRef.child("files"),
+      form = document.getElementById("form-upload"),
+      progressContainer = document.getElementById("progress-container"),
+      progressBar = document.getElementById("progress-bar"),
+      progressAdvance = document.getElementById("progress-advance"),
+      app = document.getElementById("root");
+    app.innerHTML = "";
+
+
+    document.addEventListener("change", e => {
+      if (e.target.matches("#uploader")) {
+        alert("Subiendo archivo(s)...");
+        //console.log(e.target.files);
+        let fileList = Array.from(e.target.files);
+        fileList.forEach(file => {
+          //console.log(file);
+          
+          let uploadTask = filesRef.child(file.name).put(file);
+          uploadTask.on(
+            "state_changed",
+            snapshot => {
+              //console.log(snapshot);
+              let progress = Math.floor(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              //console.log(progress);
+              progressContainer.classList.remove("d-none");
+              progressBar.style.width = `${progress}%`;
+              progressAdvance.innerHTML = `${progress}%`;
+            },
+            err => {
+              app.innerHTML = `
+                <p class="lead bg-danger text-white py-3 offset-3 col-6 align-items-center">
+                  Error al subir el archivo: ${err.code} - ${err.message}
+                </p>
+              `;
+              form.reset();
+            },
+            () => {
+              progressContainer.classList.add("d-none");
+              progressBar.style.width = `0%`;
+              progressAdvance.innerHTML = `0%`;
+              form.reset();
+              let fileRef = filesRef.child(file.name);
+              fileRef
+                .getDownloadURL()
+                .then(url => {
+                  app.innerHTML += `
+                    <p class="lead bg-success text-white py-3 offset-3 col-6 align-items-center">
+                      Puedes ver tu archivo en la siguiente:<br>
+                      <b><a href="${url}" target="_blank">url</a></b>.
+                    </p>
+                  `;
+                })
+                .catch(err => {
+                  app.innerHTML += `
+                    <p class="lead bg-danger text-white py-3 offset-3 col-6 align-items-center">
+                      Error al subir el archivo: ${err.code} - ${err.message}
+                    </p>
+                  `;
+                });
+            }
+          );
+        });
+      }
+    });
+
+    </script>
+
+  </main>
+
+
+  <footer id="footer" class="p-3 text-center bg-dark"></footer>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.0.3/smooth-scroll.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      const scroll = new SmoothScroll('a[href*="#"]', {
+        offset: '50'
+      });
+    </script>
+</body>
+
+</html>
+
+
